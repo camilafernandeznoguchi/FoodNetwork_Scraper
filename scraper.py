@@ -1,4 +1,3 @@
-#python2
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -32,9 +31,9 @@ while(run):
 
     for ingredient in ingredients[1:]:
         ingredients_recipe.append(ingredient.text)
-        #ingredient_parsed = parse_ingredient.parse(ingredient.text).as_dict()
-        #ingredient_name = ingredient_parsed["product"]
-        #ingredients_tags.append(ingredient_name)
+        ingredient_parsed = parse_ingredient.parse(ingredient.text).as_dict()
+        ingredient_name = ingredient_parsed["product"]
+        ingredients_tags.append(ingredient_name)
     #print(ingredients_tags)
 
     """Instructions"""
@@ -54,7 +53,7 @@ while(run):
         categories_recipe.append(category.text.strip())
 
     """Json encoding"""
-    data = {"title": title, "time": time, "servings": servings, "ingredients": ingredients_recipe, "instructions": instructions_recipe, "categories": categories_recipe}
+    data = {"title": title, "time": time, "servings": servings, "ingredients": ingredients_recipe, "instructions": instructions_recipe, "categories": categories_recipe, "ingredient_tags": ingredients_tags}
     recipe[recipe_counter] = data
     with open('data.json', 'w') as f:
         json.dump(recipe, f, indent=2)
